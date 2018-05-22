@@ -3,3 +3,25 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.wrapper
+{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 100px 100px auto;
+  grid-gap: 3px;
+}
+.wrapper > button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2em;
+  border: 1px black solid;
+}
+.checkin-button {
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+.wrapper > div:nth-child(2n) {
+  background-color: #ff6f69;
+}

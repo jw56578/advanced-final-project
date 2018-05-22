@@ -3,13 +3,14 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import "./App.css";
 import SignUpSignIn from "./SignUpSignIn";
 import TopNavbar from "./TopNavbar";
-import Secret from "./Secret";
+import CheckIn from "./components/CheckIn";
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
       signUpSignInError: "",
+      checkInMessage:null,
       authenticated: localStorage.getItem("token") || false
     };
     this.handleSignIn = this.handleSignIn.bind(this);
@@ -61,14 +62,17 @@ class App extends Component {
       />
     );
   }
-
+  checkInDone=(message)=>
+  {
+    this.setState({checkInMessage:message})
+  }
   renderApp() {
+    if(this.state.checkInMessage)
+      return <div>{this.state.checkInMessage}</div>
     return (
       <div>
         <Switch>
-          <Route exact path="/" render={() => <h1>I am protected!</h1>} />
-          <Route exact path="/secret" component={Secret} />
-          <Route render={() => <h1>NOT FOUND!</h1>} />
+          <Route exact path="/" render={() => <CheckIn checkInDone={this.checkInDone} />} />
         </Switch>
       </div>
     );

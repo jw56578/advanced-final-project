@@ -10,9 +10,9 @@
     "test": "npm run lint",
     "dev": "nf start",
     "build-client": "cd client && npm run build",
-    "clean-assets": "rm -rf ./public/*",
-    "copy-assets": "mkdir -p ./public && cp -R ./client/build/* ./public",
-    "compile-server": "rm -rf ./dist && babel server --out-dir dist",
+    "clean-assets": "if  exist \"public\" rmdir /s /q \"public\"",
+    "copy-assets": "mkdir \"public\" && xcopy /E  \"client\\build\" \"public\"",
+    "compile-server": "rmdir /s /q \"dist\" && babel server --out-dir dist",
     "pre-deploy": "npm run compile-server && npm run build-client && npm run clean-assets && npm run copy-assets",
     "start": "node ./dist/index",
     "client": "cd client && npm start && cd .."
@@ -56,9 +56,13 @@
     "react": "^15.5.4",
     "react-bootstrap": "^0.31.0",
     "react-dom": "^15.5.4",
+    "react-redux": "^5.0.6",
     "react-router-dom": "^4.1.1",
     "react-scripts": "^0.9.5",
+    "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0",
     "whatwg-fetch": "^2.0.3"
   },
   "proxy": "http://localhost:3001"
 }
+
